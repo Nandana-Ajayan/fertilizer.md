@@ -125,4 +125,19 @@ soil_type_label_encoder = LabelEncoder()
 data["Soil Type"] = soil_type_label_encoder.fit_transform(data["Soil Type"])
 ```
 ```python
+crop_type_label_encoder = LabelEncoder()
+data["Crop Type"] = crop_type_label_encoder.fit_transform(data["Crop Type"])
+```
+```python
+croptype_dict = {}
+for i in range(len(data["Crop Type"].unique())):
+    croptype_dict[i] = crop_type_label_encoder.inverse_transform([i])[0]
+print(croptype_dict)
+
+soiltype_dict = {}
+for i in range(len(data["Soil Type"].unique())):
+    soiltype_dict[i] = soil_type_label_encoder.inverse_transform([i])[0]
+print(soiltype_dict)
+```
+```python
 
