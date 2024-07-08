@@ -1,4 +1,5 @@
 # fertilizer.md
+## importing necessary libraries
 ```python
 import pandas as pd
 from imblearn.over_sampling import SMOTE
@@ -171,6 +172,7 @@ print(f"Train Data: {X_train.shape}, {y_train.shape}")
 print(f"Train Data: {X_test.shape}, {y_test.shape}")
 
 ```
+## model training using kNN 
 ```python
 error_rate = []
 for i in range(1, 50):
