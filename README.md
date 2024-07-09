@@ -134,14 +134,64 @@ print(f"Train Data: {X_train.shape}, {y_train.shape}")
 print(f"Train Data: {X_test.shape}, {y_test.shape}")
 
 ```
-```python
- from sklearn.preprocessing import StandardScaler
-sc = StandardScaler()
-sc.fit(X_train)
-X_train = sc.transform(X_train)
-X_test=sc.transform(X_test)
 from sklearn.preprocessing import MinMaxScaler
 mx = MinMaxScaler()
 X_train = mx.fit_transform(X_train)
 X_test = mx.transform(X_test)
+```
+
+```python
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+sc.fit(X_train)
+X_train = sc.transform(X_train)
+X_test=sc.transform(X_test)
+```
+## loading model and evaluation metrices
+```
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier, ExtraTreeClassifier
+from sklearn.ensemble import RandomForestClassifier, BaggingClassifier, GradientBoostingClassifier, AdaBoostClassifier
+from sklearn.metrics import accuracy_score
+```
+```
+models = {
+    'LogisticRegression': LogisticRegression(),
+    'SVC':SVC(),
+    'DecisionTreeClassifier':DecisionTreeClassifier(),
+    'RandomForestClassifier':RandomForestClassifier(),
+    'GradientBoostingClassifier':GradientBoostingClassifier()
+}
+```
+## Training model
+```
+for name, model in models.items():
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    score = accuracy_score(y_test, y_pred)
+    print(f"{name} model with accuracy: {score}")
+```
+## Comparison of model accuracies
+```
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+acc = [0.96,0.83,0.9,1.0,0.93]  
+model = ['LogisticRegression', 'SVC', 'DecisionTreeClassifier', 'RandomForestClassifier','GradientBoostingClassifier']  # Example model names
+
+
+print(len(acc), len(model))  
+
+
+plt.figure(figsize=[10, 5], dpi=100)
+plt.title('Accuracy Comparison')
+plt.xlabel('Accuracy')
+plt.ylabel('Algorithm')
+sns.barplot(x=acc, y=model, palette='dark')
+
+plt.show()
 ```
